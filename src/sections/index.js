@@ -1,4 +1,4 @@
+import Cover from './cover';
 import NavBar from './navbar';
 
-// eslint-disable-next-line import/prefer-default-export
-export { NavBar };
+export { Cover, NavBar };
