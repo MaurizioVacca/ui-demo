@@ -1,4 +1,5 @@
 import Button from './button';
+import Logo from './logo';
+import Spacer from './spacer';
 
-// eslint-disable-next-line import/prefer-default-export
-export { Button };
+export { Button, Logo, Spacer };
