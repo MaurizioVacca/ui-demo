@@ -16,7 +16,8 @@ const colors = {
     white: palette.WHITE,
     grey: palette.GREY,
     darkGrey: palette.DARK_GREY,
-    rapeYellow: palette.RAPE_YELLOW
+    rapeYellow: palette.RAPE_YELLOW,
+    navy: palette.NAVY
 };
 
 const buttons = {
@@ -25,7 +26,13 @@ const buttons = {
         color: colors.secondary,
         fontSize: getRelativeFontSize(14),
         fontFamily: fontFamilies.primary,
-        fontWeight: 700
+        fontWeight: 700,
+        borderRadius: 8,
+        padding: '18px 22px',
+        border: `1px solid ${colors.navy}`,
+        textTransform: 'uppercase',
+        letterSpacing: 2,
+        cursor: 'pointer'
     }
 };
 
