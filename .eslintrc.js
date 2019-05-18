@@ -26,6 +26,7 @@ module.exports = {
         'function-paren-newline': ['error', 'multiline'],
         'comma-dangle': ['error', 'never'],
         'react/jsx-filename-extension': [1, { extensions: ['.js'] }],
-        'jsx-a11y/media-has-caption': 0
+        'jsx-a11y/media-has-caption': 0,
+        'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/stories/*.js'] }]
     }
 };
