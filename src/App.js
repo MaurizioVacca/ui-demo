@@ -1,5 +1,12 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 
-const App = () => <div />;
+import theme from 'theme';
+
+const App = () => (
+    <ThemeProvider theme={theme}>
+        <div />
+    </ThemeProvider>
+);
 
 export default App;
