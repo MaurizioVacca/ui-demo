@@ -2,10 +2,11 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import theme from 'theme';
+import { NavBar } from 'sections';
 
 const App = () => (
     <ThemeProvider theme={theme}>
-        <div />
+        <NavBar />
     </ThemeProvider>
 );
 
