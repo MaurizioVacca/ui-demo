@@ -1,5 +1,11 @@
 import Button from './button';
+import Card from './card';
 import Logo from './logo';
 import Spacer from './spacer';
 
-export { Button, Logo, Spacer };
+export {
+    Button,
+    Card,
+    Logo,
+    Spacer
+};
