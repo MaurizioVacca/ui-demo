@@ -32,7 +32,8 @@ const buttons = {
         border: `1px solid ${colors.navy}`,
         textTransform: 'uppercase',
         letterSpacing: 2,
-        cursor: 'pointer'
+        cursor: 'pointer',
+        lineHeight: getRelativeFontSize(14)
     }
 };
 
