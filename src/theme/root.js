@@ -1,5 +1,6 @@
 import palette from './palette';
-import fonts, { getRelativeFontSize } from './fonts';
+import fonts from './fonts';
+import getRelativeSize from './mixins';
 
 const fontFamilies = {
     primary: fonts.family.MONTSERRAT,
@@ -24,7 +25,7 @@ const buttons = {
     primary: {
         backgroundColor: colors.primary,
         color: colors.secondary,
-        fontSize: getRelativeFontSize(14),
+        fontSize: getRelativeSize(14),
         fontFamily: fontFamilies.primary,
         fontWeight: 700,
         borderRadius: 8,
@@ -33,7 +34,7 @@ const buttons = {
         textTransform: 'uppercase',
         letterSpacing: 2,
         cursor: 'pointer',
-        lineHeight: getRelativeFontSize(14)
+        lineHeight: getRelativeSize(14)
     }
 };
 
@@ -41,25 +42,25 @@ const text = {
     h1: {
         color: colors.secondary,
         fontFamily: fontFamilies.primary,
-        fontSize: getRelativeFontSize(36),
+        fontSize: getRelativeSize(36),
         fontWeight: 700
     },
     h2: {
         color: colors.secondary,
         fontFamily: fontFamilies.primary,
-        fontSize: getRelativeFontSize(26),
+        fontSize: getRelativeSize(26),
         fontWeight: 700
     },
     paragraph: {
         color: colors.darkGrey,
         fontFamily: fontFamilies.secondary,
-        fontSize: getRelativeFontSize(16),
+        fontSize: getRelativeSize(16),
         fontWeight: 400
     },
     caption: {
         color: colors.secondary,
         fontFamily: fontFamilies.primary,
-        fontSize: getRelativeFontSize(14),
+        fontSize: getRelativeSize(14),
         fontWeight: 400
     }
 };

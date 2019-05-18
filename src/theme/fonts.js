@@ -9,6 +9,4 @@ const fonts = {
     defaultSize: 16
 };
 
-export const getRelativeFontSize = (refSize, baseSize = fonts.defaultSize) => `${refSize / baseSize}rem`;
-
 export default fonts;
