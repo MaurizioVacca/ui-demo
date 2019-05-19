@@ -10,6 +10,7 @@ import { articleShape } from 'models';
 import { Grid, Column } from 'shared';
 
 import Cover from '../cover';
+import Highlights from '../highlights';
 import {
     ArticleAnimatedBackground,
     ArticleBody,
@@ -22,10 +23,15 @@ import {
 
 const propTypes = {
     cover: PropTypes.string.isRequired,
-    article: articleShape.isRequired
+    article: articleShape.isRequired,
+    highlights: PropTypes.arrayOf(articleShape)
 };
 
-const Article = React.forwardRef(({ cover, article }, ref) => {
+const defaultProp = {
+    highlights: []
+};
+
+const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
     const [backgroundScale, setBackgroundScale] = useState(1);
 
     const animatedBgRef = useRef(null);
@@ -64,10 +70,12 @@ const Article = React.forwardRef(({ cover, article }, ref) => {
                     </Column>
                 </Grid>
             </ArticleContent>
+            <Highlights values={highlights} />
         </ArticleWrapper>
     );
 });
 
 Article.propTypes = propTypes;
+Article.defaultProps = defaultProp;
 
 export default Article;
