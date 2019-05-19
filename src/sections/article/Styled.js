@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { getRelativeSize } from 'theme';
@@ -46,10 +47,14 @@ const ArticleAnimatedBackground = styled.div(({ theme, xScale = 1 }) => ({
     zIndex: 1,
     top: 0,
     left: 0,
-    transition: 'transform 0.4s ease-in-out',
+    transition: 'transform 0.4s ease-out',
     borderRadius: '12px 12px 0 0',
     transform: `scale(${xScale}, 1)`
 }));
+
+ArticleAnimatedBackground.propTypes = {
+    xScale: PropTypes.number
+};
 
 const ArticleCoverWrapper = styled.div(() => ({
     position: 'relative',
@@ -62,6 +67,21 @@ const ArticleCoverWrapper = styled.div(() => ({
     }
 }));
 
+const RelatedArticles = styled.div(({ offsetY = 0 }) => ({
+    position: 'relative',
+    zIndex: 10,
+    top: 464,
+    right: 161,
+    float: 'right',
+    transform: `translateY(${offsetY}px)`,
+    transformStyle: 'preserve-3d',
+    transition: 'transform 200ms linear'
+}));
+
+RelatedArticles.propTypes = {
+    offsetY: PropTypes.number
+};
+
 export {
     ArticleBody,
     ArticleCaption,
@@ -69,5 +89,6 @@ export {
     ArticleAnimatedBackground,
     ArticleCoverWrapper,
     ArticleHeading,
-    ArticleWrapper
+    ArticleWrapper,
+    RelatedArticles
 };

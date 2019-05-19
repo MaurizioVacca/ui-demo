@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -25,8 +25,10 @@ const Highlights = ({ values, className }) => (
 Highlights.propTypes = propTypes;
 Highlights.defaultProps = defaultProps;
 
-export default styled(Highlights)(() => ({
+const withStyles = styled(Highlights)(() => ({
     [`${HighlightCard} + ${HighlightCard}`]: {
         marginTop: 30
     }
 }));
+
+export default memo(withStyles);

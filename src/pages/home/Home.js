@@ -1,13 +1,14 @@
 import React, {
     Fragment,
     useState,
-    useEffect
+    useEffect,
+    memo
 } from 'react';
 
+import getArticles from 'api/articles';
 import { Article, NavBar } from 'sections';
 
 import HomeCover from 'images/cover.png';
-import getArticles from 'api/articles';
 
 const Home = () => {
     const [articles, setArticles] = useState([])
@@ -70,4 +71,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default memo(Home);

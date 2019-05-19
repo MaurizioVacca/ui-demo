@@ -1,7 +1,8 @@
 import React, {
     useRef,
     useEffect,
-    useState
+    useState,
+    memo
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -18,7 +19,8 @@ import {
     ArticleHeading,
     ArticleWrapper,
     ArticleCoverWrapper,
-    ArticleContent
+    ArticleContent,
+    RelatedArticles
 } from './Styled';
 
 const propTypes = {
@@ -33,15 +35,33 @@ const defaultProp = {
 
 const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
     const [backgroundScale, setBackgroundScale] = useState(1);
-
+    const [offsetY, setOffsetY] = useState(-122);
+    const [lastScroll, setLastScroll] = useState(0);
     const animatedBgRef = useRef(null);
+    const parallaxRef = useRef(null);
 
-    useEffect(() => {
+    const getScrollDirection = () => {
+        const st = (document.body.getBoundingClientRect()).top;
+        let direction = '';
+
+        if (st < lastScroll) {
+            direction = 'bottom';
+        } else {
+            direction = 'up';
+        }
+
+        setLastScroll(st);
+
+        return direction;
+    };
+
+    const runArticleBgAnimation = () => {
         const checkArticlePosition = () => {
-            const offsetTop = animatedBgRef.current.getBoundingClientRect().top;
+            const { current: domNode } = animatedBgRef;
+            const offsetTop = domNode.getBoundingClientRect().top;
 
             if (offsetTop <= 0 && backgroundScale === 1) {
-                setBackgroundScale(1.9);
+                setBackgroundScale(1.1);
             }
 
             if (offsetTop > 0 && backgroundScale > 1) {
@@ -52,10 +72,40 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
         window.addEventListener('scroll', checkArticlePosition);
 
         return () => window.removeEventListener('scroll', checkArticlePosition);
-    }, [animatedBgRef, backgroundScale]);
+    };
+
+    const runParallaxAnimation = () => {
+        const moveParallax = () => {
+            const { current: animateBgDomNode } = animatedBgRef;
+            const direction = getScrollDirection();
+            const offsetTop = animateBgDomNode.getBoundingClientRect().top;
+
+            if (offsetY < 0 && direction === 'bottom') {
+                const testValue = offsetY + Math.abs(lastScroll * 0.10);
+
+                setOffsetY(testValue > 0 ? 0 : testValue);
+            }
+
+            if (offsetY > -122 && direction === 'up' && offsetTop >= 0) {
+                const testValue = offsetY - Math.abs(lastScroll * 0.10);
+
+                setOffsetY(testValue < -122 ? -122 : testValue);
+            }
+        };
+
+        window.addEventListener('scroll', moveParallax);
+
+        return () => window.removeEventListener('scroll', moveParallax);
+    };
+
+    useEffect(runArticleBgAnimation);
+    useEffect(runParallaxAnimation);
 
     return (
         <ArticleWrapper>
+            <RelatedArticles ref={parallaxRef} offsetY={offsetY}>
+                <Highlights values={highlights} />
+            </RelatedArticles>
             <ArticleCoverWrapper>
                 <Cover imgPath={cover} />
             </ArticleCoverWrapper>
@@ -70,7 +120,6 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
                     </Column>
                 </Grid>
             </ArticleContent>
-            <Highlights values={highlights} />
         </ArticleWrapper>
     );
 });
@@ -78,4 +127,4 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
 Article.propTypes = propTypes;
 Article.defaultProps = defaultProp;
 
-export default Article;
+export default memo(Article);
