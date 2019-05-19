@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { articleShape } from 'models';
+
 import {
     HighlightButton,
     HighlightCard,
@@ -8,10 +10,10 @@ import {
     HighlightIcon,
     HighlightTitle
 } from './Styled';
-import highlightProps from './highlightProps';
+
 
 const propTypes = {
-    content: highlightProps.isRequired,
+    content: articleShape.isRequired,
     position: PropTypes.string.isRequired
 };
 

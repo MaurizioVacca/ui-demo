@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { articleShape } from 'models';
+
 import Highlight from './Highlight';
 import { HighlightCard } from './Styled';
-import highlightProps from './highlightProps';
 
 const propTypes = {
-    values: PropTypes.arrayOf(highlightProps).isRequired,
+    values: PropTypes.arrayOf(articleShape).isRequired,
     className: PropTypes.string
 };
 
