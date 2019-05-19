@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Logo, Spacer } from 'shared';
 
@@ -9,9 +10,17 @@ import {
     NavMenu
 } from './Styled';
 
-const NavBar = () => (
-    <NavBarFixedWrapper>
-        <NavBarContent>
+const propTypes = {
+    show: PropTypes.bool
+};
+
+const defaultProps = {
+    show: true
+};
+
+const NavBar = React.forwardRef(({ show }, ref) => (
+    <NavBarFixedWrapper ref={ref}>
+        <NavBarContent show={show}>
             <Logo />
             <Spacer />
             <NavMenu>
@@ -22,6 +31,9 @@ const NavBar = () => (
             <Spacer />
         </NavBarContent>
     </NavBarFixedWrapper>
-);
+));
+
+NavBar.propTypes = propTypes;
+NavBar.defaultProps = defaultProps;
 
 export default NavBar;
