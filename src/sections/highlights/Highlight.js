@@ -19,7 +19,7 @@ const propTypes = {
 
 const Highlight = ({ content, position }) => (
     <HighlightCard id={position}>
-        {content.icon && <HighlightIcon>{content.icon}</HighlightIcon>}
+        {content.icon && <HighlightIcon name={content.icon} />}
         {content.caption && <HighlightCaption>{content.caption}</HighlightCaption>}
         <HighlightTitle>{content.title}</HighlightTitle>
         {content.hasDetails && <HighlightButton>clicca qui</HighlightButton>}

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { getRelativeSize } from 'theme';
-import { Card, Button } from 'shared';
+import { Card, Button, Icon } from 'shared';
 
 const HighlightButton = styled(Button)(() => ({
     width: '100%'
@@ -26,7 +26,7 @@ const HighlightCaption = styled.div(({ theme }) => ({
     }
 }));
 
-const HighlightIcon = styled.div(() => ({
+const HighlightIcon = styled(Icon)(() => ({
     position: 'relative',
     zIndex: 10,
     [`& + ${HighlightCaption}`]: {
