@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Cover from 'sections/cover';
+import { ArticleWrapper } from '../article/Styled';
 
 import { getRelativeSize } from '../../theme';
 
@@ -29,16 +29,18 @@ const NavBarContent = styled.div(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    height: 21,
+    transition: 'transform 0.2s ease-out'
 }));
 
-const NavBarFixedWrapper = styled.div(() => ({
+const NavBarFixedWrapper = styled.div(({ theme }) => ({
     position: 'fixed',
     zIndex: 20,
     top: 0,
-    width: '100%',
+    width: theme.viewport.width,
     maxHeight: 61,
-    [`& + ${Cover}`]: {
+    [`& + ${ArticleWrapper}`]: {
         marginTop: 61
     }
 }));
