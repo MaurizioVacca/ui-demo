@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 
 import { articleShape } from 'models';
 
+import { Grid, Column } from 'shared';
+
 import Cover from '../cover';
 import {
     ArticleAnimatedBackground,
@@ -23,7 +25,7 @@ const propTypes = {
     article: articleShape.isRequired
 };
 
-const Article = ({ cover, article }) => {
+const Article = React.forwardRef(({ cover, article }, ref) => {
     const [backgroundScale, setBackgroundScale] = useState(1);
 
     const animatedBgRef = useRef(null);
@@ -51,15 +53,20 @@ const Article = ({ cover, article }) => {
             <ArticleCoverWrapper>
                 <Cover imgPath={cover} />
             </ArticleCoverWrapper>
-            <ArticleContent>
+            <ArticleContent ref={ref}>
                 <ArticleAnimatedBackground ref={animatedBgRef} xScale={backgroundScale} />
-                <ArticleCaption>{article.caption}</ArticleCaption>
-                <ArticleHeading>{article.title}</ArticleHeading>
-                <ArticleBody>{article.description}</ArticleBody>
+                <Grid>
+                    <Column from={1} to={2} />
+                    <Column from={2} to={8}>
+                        <ArticleCaption>{article.caption}</ArticleCaption>
+                        <ArticleHeading>{article.title}</ArticleHeading>
+                        <ArticleBody>{article.description}</ArticleBody>
+                    </Column>
+                </Grid>
             </ArticleContent>
         </ArticleWrapper>
     );
-};
+});
 
 Article.propTypes = propTypes;
 

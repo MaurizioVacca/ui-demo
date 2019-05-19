@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { ArticleWrapper } from '../article/Styled';
@@ -23,7 +24,7 @@ const NavMenu = styled.ul(({ theme }) => ({
     textTransform: 'uppercase'
 }));
 
-const NavBarContent = styled.div(({ theme }) => ({
+const NavBarContent = styled.div(({ theme, show = true }) => ({
     backgroundColor: theme.colors.white,
     padding: '20px 60px',
     display: 'flex',
@@ -31,8 +32,13 @@ const NavBarContent = styled.div(({ theme }) => ({
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
     height: 21,
-    transition: 'transform 0.2s ease-out'
+    transition: 'transform 0.2s ease-out',
+    transform: `translateY(${!show ? '-100%' : '0'})`
 }));
+
+NavBarContent.propTypes = {
+    show: PropTypes.bool
+};
 
 const NavBarFixedWrapper = styled.div(({ theme }) => ({
     position: 'fixed',

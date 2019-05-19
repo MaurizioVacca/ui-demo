@@ -1,6 +1,6 @@
 import palette from './palette';
 import fonts from './fonts';
-import getRelativeSize from './mixins';
+import { getRelativeSize } from './mixins';
 
 const fontFamilies = {
     primary: fonts.family.MONTSERRAT,
@@ -65,6 +65,12 @@ const text = {
     }
 };
 
+const gridSettings = {
+    columns: 12,
+    width: 80,
+    gutter: 18
+};
+
 const viewport = {
     width: 1280,
     position: 'relative',
@@ -78,5 +84,6 @@ export default {
     colors,
     buttons,
     text,
-    viewport
+    viewport,
+    gridSettings
 };

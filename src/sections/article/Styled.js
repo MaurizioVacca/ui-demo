@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+
+import { getRelativeSize } from 'theme';
+
 import Cover from '../cover';
 
 const ArticleWrapper = styled.div(() => ({
@@ -9,13 +12,16 @@ const ArticleWrapper = styled.div(() => ({
 const ArticleHeading = styled.h1(({ theme }) => ({
     ...theme.text.h1,
     zIndex: 10,
-    position: 'relative'
+    position: 'relative',
+    lineHeight: getRelativeSize(44)
 }));
 
 const ArticleBody = styled.div(({ theme }) => ({
     ...theme.text.paragraph,
     zIndex: 10,
-    position: 'relative'
+    position: 'relative',
+    letterSpacing: 0.5,
+    lineHeight: getRelativeSize(26)
 }));
 
 const ArticleCaption = styled.div(({ theme }) => ({
@@ -27,9 +33,9 @@ const ArticleCaption = styled.div(({ theme }) => ({
 const ArticleContent = styled.div(() => ({
     position: 'relative',
     top: -188,
-    width: 976,
+    width: 1170,
     margin: '0 auto',
-    padding: '42px 98px'
+    paddingTop: 42
 }));
 
 const ArticleAnimatedBackground = styled.div(({ theme, xScale = 1 }) => ({

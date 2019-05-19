@@ -1,7 +1,11 @@
 import theme from './root';
-import getRelativeSize from './mixins';
+import { getRelativeSize, createGrid } from './mixins';
 import GlobalStyle from './GlobalStyle';
 
 export default theme;
 
-export { getRelativeSize, GlobalStyle };
+export {
+    getRelativeSize,
+    createGrid,
+    GlobalStyle
+};
