@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import theme from 'theme';
+import theme, { GlobalStyle } from 'theme';
 import Home from 'pages';
 
 const App = () => (
     <ThemeProvider theme={theme}>
-        <Home />
+        <Fragment>
+            <GlobalStyle />
+            <Home />
+        </Fragment>
     </ThemeProvider>
 );
 
