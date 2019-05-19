@@ -1,32 +1,18 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
 
 const propTypes = {
     imgPath: PropTypes.string.isRequired,
-    className: PropTypes.string
 };
 
-const defaultProps = {
-    className: null
-};
-
-const Cover = ({
-    imgPath,
-    className
-}) => (
-    <div className={className}>
-        <img src={imgPath} alt="cover" />
-    </div>
-);
+const Cover = styled.div(({ imgPath }) => ({
+    width: '100%',
+    height: '100%',
+    backgroundImage: `url('${imgPath}')`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+}));
 
 Cover.propTypes = propTypes;
-Cover.defaultProps = defaultProps;
 
-export default styled(Cover)(() => ({
-    img: {
-        width: '100%',
-        height: 'auto'
-    }
-}));
+export default Cover;
