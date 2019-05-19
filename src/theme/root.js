@@ -75,7 +75,6 @@ const viewport = {
     width: 1280,
     position: 'relative',
     background: colors.white,
-    overflow: 'hidden',
     fontSize: fonts.defaultSize
 };
 
