@@ -17,7 +17,7 @@ const defaultProps = {
 
 const Highlights = ({ values, className }) => (
     <div className={className}>
-        {values.map(highlight => <Highlight content={highlight} key={highlight.id} />)}
+        {values.map((highlight, index) => <Highlight content={highlight} key={highlight.id} position={`0${index + 1}`} />)}
     </div>
 );
 
