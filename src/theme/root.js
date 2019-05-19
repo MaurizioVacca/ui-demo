@@ -65,9 +65,18 @@ const text = {
     }
 };
 
+const viewport = {
+    width: 1280,
+    position: 'relative',
+    background: colors.white,
+    overflow: 'hidden',
+    fontSize: fonts.defaultSize
+};
+
 export default {
     fontFamilies,
     colors,
     buttons,
-    text
+    text,
+    viewport
 };
