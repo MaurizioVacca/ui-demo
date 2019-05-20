@@ -1,5 +1,5 @@
-import articleData from './mock';
+import { articles } from './mock';
 
-const getArticles = () => articleData;
+const getArticles = () => articles;
 
 export default getArticles;
