@@ -1,4 +1,4 @@
 import articleShape from './articleShape';
+import userShape from './userShape';
 
-// eslint-disable-next-line import/prefer-default-export
-export { articleShape };
+export { articleShape, userShape };
