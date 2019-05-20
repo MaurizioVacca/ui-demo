@@ -7,12 +7,21 @@ import React, {
 import PropTypes from 'prop-types';
 
 import { articleShape } from 'models';
+import getUserById from 'api/users';
 
-import { Grid, Column } from 'shared';
+import {
+    Grid,
+    Column,
+    Icon
+} from 'shared';
 
 import Cover from '../cover';
 import Highlights from '../highlights';
 import {
+    ArticleActions,
+    ArticleAuthor,
+    ArticleAuthorAvatar,
+    ArticleAuthorFullName,
     ArticleAnimatedBackground,
     ArticleBody,
     ArticleCaption,
@@ -35,10 +44,12 @@ const defaultProp = {
 
 const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
     const [backgroundScale, setBackgroundScale] = useState(1);
+    const [user, setUser] = useState(null);
     const [offsetY, setOffsetY] = useState(-122);
     const [lastScroll, setLastScroll] = useState(0);
     const animatedBgRef = useRef(null);
     const parallaxRef = useRef(null);
+    const actions = ['flame', 'paper-towel', 'drop'];
 
     const getScrollDirection = () => {
         const st = (document.body.getBoundingClientRect()).top;
@@ -98,8 +109,20 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
         return () => window.removeEventListener('scroll', moveParallax);
     };
 
+    // Bind the article bg animation
     useEffect(runArticleBgAnimation);
+
+    // bind the parallax
     useEffect(runParallaxAnimation);
+
+    // retrieve the user data
+    useEffect(() => {
+        const data = getUserById(article.author);
+
+        console.log(data);
+
+        setUser(data);
+    }, [article]);
 
     return (
         <ArticleWrapper>
@@ -119,6 +142,24 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
                         <ArticleBody>{article.description}</ArticleBody>
                     </Column>
                 </Grid>
+                {user && (
+                    <Grid>
+                        <Column from={1} to={2} />
+                        <Column from={2} to={7}>
+                            <ArticleAuthor>
+                                <ArticleAuthorAvatar>
+                                    <img src={user.avatar} alt="author-avatar" />
+                                </ArticleAuthorAvatar>
+                                <ArticleAuthorFullName>{`${user.name} ${user.surname}`}</ArticleAuthorFullName>
+                            </ArticleAuthor>
+                        </Column>
+                        <Column from={7} to={8}>
+                            <ArticleActions>
+                                {actions.map(action => <Icon name={action} key={action} />)}
+                            </ArticleActions>
+                        </Column>
+                    </Grid>
+                )}
             </ArticleContent>
         </ArticleWrapper>
     );

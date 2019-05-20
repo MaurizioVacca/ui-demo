@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import {
     rPig,
@@ -38,4 +39,6 @@ const Icon = ({ name, className }) => (
 Icon.propTypes = propTypes;
 Icon.defaultProps = defaultProps;
 
-export default Icon;
+export default styled(Icon)(() => ({
+    display: 'inline-block'
+}));

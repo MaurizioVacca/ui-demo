@@ -18,7 +18,8 @@ const colors = {
     grey: palette.GREY,
     darkGrey: palette.DARK_GREY,
     rapeYellow: palette.RAPE_YELLOW,
-    navy: palette.NAVY
+    navy: palette.NAVY,
+    dewDrop: palette.DEWDROP
 };
 
 const buttons = {

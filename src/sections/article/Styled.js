@@ -22,7 +22,46 @@ const ArticleBody = styled.div(({ theme }) => ({
     zIndex: 10,
     position: 'relative',
     letterSpacing: 0.5,
-    lineHeight: getRelativeSize(26)
+    lineHeight: getRelativeSize(26),
+    paddingBottom: 24,
+    borderBottom: `1px solid ${theme.colors.dewDrop}`,
+    color: theme.colors.darkGrey
+}));
+
+const ArticleAuthor = styled.div(({ theme }) => ({
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'flex-row',
+    alignItems: 'center',
+    zIndex: 10,
+    paddingTop: 22,
+    color: theme.colors.grey,
+    fontSize: getRelativeSize(12),
+    fontFamily: theme.fontFamilies.secondary
+}));
+
+const ArticleAuthorFullName = styled.div``;
+
+const ArticleAuthorAvatar = styled.div(() => ({
+    position: 'relative',
+    zIndex: 10,
+    borderRadius: '100%',
+    overflow: 'hidden',
+    height: 24,
+    width: 24,
+    [`& + ${ArticleAuthorFullName}`]: {
+        marginLeft: 10
+    }
+}));
+
+const ArticleActions = styled.div(() => ({
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    zIndex: 10,
+    paddingTop: 22
 }));
 
 const ArticleCaption = styled.div(({ theme }) => ({
@@ -75,7 +114,8 @@ const RelatedArticles = styled.div(({ offsetY = 0 }) => ({
     float: 'right',
     transform: `translateY(${offsetY}px)`,
     transformStyle: 'preserve-3d',
-    transition: 'transform 200ms linear'
+    transition: 'transform 200ms linear',
+    paddingBottom: 26
 }));
 
 RelatedArticles.propTypes = {
@@ -83,6 +123,10 @@ RelatedArticles.propTypes = {
 };
 
 export {
+    ArticleActions,
+    ArticleAuthor,
+    ArticleAuthorAvatar,
+    ArticleAuthorFullName,
     ArticleBody,
     ArticleCaption,
     ArticleContent,
