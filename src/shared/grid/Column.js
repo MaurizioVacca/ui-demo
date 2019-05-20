@@ -7,7 +7,7 @@ const Column = styled.div(({ from, to }) => ({
 
 Column.propTypes = {
     from: PropTypes.number.isRequired,
-    to: PropTypes.number.isRequired,
+    to: PropTypes.number.isRequired
 };
 
 export default Column;
