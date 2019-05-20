@@ -7,7 +7,8 @@ const articleShape = PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     hasDetails: PropTypes.bool,
-    author: PropTypes.number.isRequired
+    author: PropTypes.number.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string)
 });
 
 export default articleShape;
