@@ -19,7 +19,7 @@ const Home = () => {
     const fetchData = () => {
         let remoteData = null;
 
-        if (!remoteData) {
+        if (!remoteData && articles.length === 0) {
             remoteData = getArticles();
 
             setArticles(remoteData);
@@ -50,7 +50,7 @@ const Home = () => {
         return () => window.removeEventListener('scroll', checkNavbarDistanceFromContent);
     };
 
-    useEffect(fetchData,[]);
+    useEffect(fetchData, []);
     useEffect(animateNavBar);
 
     const highlights = articles.filter((article, index) => index > 0);
