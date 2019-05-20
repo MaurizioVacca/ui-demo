@@ -9,28 +9,18 @@ import PropTypes from 'prop-types';
 import { articleShape } from 'models';
 import getUserById from 'api/users';
 
-import {
-    Grid,
-    Column,
-    Icon
-} from 'shared';
-
-import Cover from '../cover';
 import Highlights from '../highlights';
+
 import {
-    ArticleActions,
-    ArticleAuthor,
-    ArticleAuthorAvatar,
-    ArticleAuthorFullName,
     ArticleAnimatedBackground,
-    ArticleBody,
-    ArticleCaption,
-    ArticleHeading,
     ArticleWrapper,
-    ArticleCoverWrapper,
     ArticleContent,
     RelatedArticles
 } from './Styled';
+import ArticleDetails from './ArticleDetails';
+import ArticleExtras from './ArticleExtras';
+import ArticleGallery from './ArticleGallery';
+import ArticleCover from './ArticleCover';
 
 const propTypes = {
     cover: PropTypes.string.isRequired,
@@ -49,7 +39,6 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
     const [lastScroll, setLastScroll] = useState(0);
     const animatedBgRef = useRef(null);
     const parallaxRef = useRef(null);
-    const actions = ['flame', 'paper-towel', 'drop'];
 
     const getScrollDirection = () => {
         const st = (document.body.getBoundingClientRect()).top;
@@ -119,8 +108,6 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
     useEffect(() => {
         const data = getUserById(article.author);
 
-        console.log(data);
-
         setUser(data);
     }, [article]);
 
@@ -129,37 +116,12 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
             <RelatedArticles ref={parallaxRef} offsetY={offsetY}>
                 <Highlights values={highlights} />
             </RelatedArticles>
-            <ArticleCoverWrapper>
-                <Cover imgPath={cover} />
-            </ArticleCoverWrapper>
+            <ArticleCover cover={cover} />
             <ArticleContent ref={ref}>
                 <ArticleAnimatedBackground ref={animatedBgRef} xScale={backgroundScale} />
-                <Grid>
-                    <Column from={1} to={2} />
-                    <Column from={2} to={8}>
-                        <ArticleCaption>{article.caption}</ArticleCaption>
-                        <ArticleHeading>{article.title}</ArticleHeading>
-                        <ArticleBody>{article.description}</ArticleBody>
-                    </Column>
-                </Grid>
-                {user && (
-                    <Grid>
-                        <Column from={1} to={2} />
-                        <Column from={2} to={7}>
-                            <ArticleAuthor>
-                                <ArticleAuthorAvatar>
-                                    <img src={user.avatar} alt="author-avatar" />
-                                </ArticleAuthorAvatar>
-                                <ArticleAuthorFullName>{`${user.name} ${user.surname}`}</ArticleAuthorFullName>
-                            </ArticleAuthor>
-                        </Column>
-                        <Column from={7} to={8}>
-                            <ArticleActions>
-                                {actions.map(action => <Icon name={action} key={action} />)}
-                            </ArticleActions>
-                        </Column>
-                    </Grid>
-                )}
+                <ArticleDetails article={article} />
+                {user && <ArticleExtras user={user} /> }
+                <ArticleGallery images={article.images} />
             </ArticleContent>
         </ArticleWrapper>
     );

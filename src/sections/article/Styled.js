@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import { getRelativeSize } from 'theme';
 
+import { Grid, Cell } from 'shared';
+
 import Cover from '../cover';
 
 const ArticleWrapper = styled.div(() => ({
@@ -122,9 +124,28 @@ RelatedArticles.propTypes = {
     offsetY: PropTypes.number
 };
 
+const ArticleGalleryGrid = styled(Grid)(({ theme }) => ({
+    gridTemplateRows: `repeat(2, ${theme.gridSettings.width}px)`,
+    position: 'relative',
+    zIndex: 10,
+    marginTop: 71
+}));
+
+const ArticleGalleryImageWrapper = styled(Cell)(() => ({
+    img: {
+        width: '100%',
+        height: '100%'
+    },
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+    overflow: 'hidden;'
+}));
+
 export {
     ArticleActions,
     ArticleAuthor,
+    ArticleGalleryImageWrapper,
     ArticleAuthorAvatar,
     ArticleAuthorFullName,
     ArticleBody,
@@ -132,6 +153,7 @@ export {
     ArticleContent,
     ArticleAnimatedBackground,
     ArticleCoverWrapper,
+    ArticleGalleryGrid,
     ArticleHeading,
     ArticleWrapper,
     RelatedArticles
