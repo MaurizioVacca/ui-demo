@@ -73,7 +73,7 @@ const gridSettings = {
 };
 
 const viewport = {
-    width: 1280,
+    maxWidth: 1280,
     position: 'relative',
     background: colors.white,
     fontSize: fonts.defaultSize

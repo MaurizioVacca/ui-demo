@@ -8,7 +8,8 @@ const GlobalStyle = createGlobalStyle(({ theme }) => ({
     },
     '#uiDemo': {
         ...theme.viewport,
-        margin: '0 auto'
+        margin: '0 auto',
+        width: '100%'
     }
 }));
 

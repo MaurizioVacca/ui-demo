@@ -44,7 +44,8 @@ const NavBarFixedWrapper = styled.div(({ theme }) => ({
     position: 'fixed',
     zIndex: 20,
     top: 0,
-    width: theme.viewport.width,
+    width: 'calc(100% - 120px)',
+    maxWidth: theme.viewport.maxWidth,
     maxHeight: 61,
     [`& + ${ArticleWrapper}`]: {
         marginTop: 61
