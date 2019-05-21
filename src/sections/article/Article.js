@@ -2,7 +2,8 @@ import React, {
     useRef,
     useEffect,
     useState,
-    memo
+    memo,
+    Fragment
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -111,19 +112,26 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
         setUser(data);
     }, [article]);
 
+    const handleHighlightSelect = () => {};
+
     return (
-        <ArticleWrapper>
-            <RelatedArticles ref={parallaxRef} offsetY={offsetY}>
-                <Highlights values={highlights} />
-            </RelatedArticles>
-            <ArticleCover cover={cover} />
-            <ArticleContent ref={ref}>
-                <ArticleAnimatedBackground ref={animatedBgRef} xScale={backgroundScale} />
-                <ArticleDetails article={article} />
-                {user && <ArticleExtras user={user} /> }
-                <ArticleGallery images={article.images} />
-            </ArticleContent>
-        </ArticleWrapper>
+        <Fragment>
+            <ArticleWrapper>
+                <RelatedArticles ref={parallaxRef} offsetY={offsetY}>
+                    <Highlights
+                        values={highlights}
+                        onHandleSelect={handleHighlightSelect}
+                    />
+                </RelatedArticles>
+                <ArticleCover cover={cover} />
+                <ArticleContent ref={ref}>
+                    <ArticleAnimatedBackground ref={animatedBgRef} xScale={backgroundScale} />
+                    <ArticleDetails article={article} />
+                    {user && <ArticleExtras user={user} /> }
+                    <ArticleGallery images={article.images} />
+                </ArticleContent>
+            </ArticleWrapper>
+        </Fragment>
     );
 });
 

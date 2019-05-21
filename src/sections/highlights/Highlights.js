@@ -9,18 +9,33 @@ import { HighlightCard } from './Styled';
 
 const propTypes = {
     values: PropTypes.arrayOf(articleShape).isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    onHandleSelect: PropTypes.func
 };
 
 const defaultProps = {
-    className: ''
+    className: '',
+    onHandleSelect: () => {}
 };
 
-const Highlights = ({ values, className }) => (
-    <div className={className}>
-        {values.map((highlight, index) => <Highlight content={highlight} key={highlight.id} position={`0${index + 1}`} />)}
-    </div>
-);
+const Highlights = ({ values, className, onHandleSelect }) => {
+    const handleHighlightClick = ({ content: highlight, event }) => onHandleSelect({
+        event, highlight
+    });
+
+    return (
+        <div className={className}>
+            {values.map((highlight, index) => (
+                <Highlight
+                    content={highlight}
+                    key={highlight.id}
+                    position={`0${index + 1}`}
+                    onHighlightClick={handleHighlightClick}
+                />
+            ))}
+        </div>
+    );
+};
 
 Highlights.propTypes = propTypes;
 Highlights.defaultProps = defaultProps;
