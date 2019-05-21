@@ -6,7 +6,8 @@ import { linkTo } from '@storybook/addon-links';
 
 import { Welcome } from '@storybook/react/demo';
 
-import { Button, Card } from 'shared';
+import { Button, Card, Modal } from 'shared';
+import { useModal } from 'shared/modal';
 import Highlight from 'sections/highlights/Highlight';
 
 const articleSample = {
@@ -27,4 +28,24 @@ storiesOf('Card', module)
     .add('basic', () => <Card>This is a basic card</Card>);
 
 storiesOf('Highlight', module)
-    .add('basic', () => <Highlight content={articleSample} />);
+    .add('basic', () => (
+        <Highlight
+            content={articleSample}
+            position="01"
+            onHighlightClick={action('highlight clicked!')}
+        />
+    ));
+
+const StoryModalCtrl = () => {
+    const [isOpen, toggle] = useModal();
+
+    return (
+        <div>
+            <Button onClick={toggle}>Open Modal!</Button>
+            <Modal status={isOpen} onClickOutside={toggle} />
+        </div>
+    );
+};
+
+storiesOf('Modal', module)
+    .add('basic', () => <StoryModalCtrl />);
