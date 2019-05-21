@@ -6,6 +6,7 @@ import { Logo, Spacer } from 'shared';
 import {
     NavBarFixedWrapper,
     NavBarContent,
+    NavBarContentWrapper,
     NavItem,
     NavMenu
 } from './Styled';
@@ -20,16 +21,18 @@ const defaultProps = {
 
 const NavBar = React.forwardRef(({ show }, ref) => (
     <NavBarFixedWrapper ref={ref}>
-        <NavBarContent show={show}>
-            <Logo />
-            <Spacer />
-            <NavMenu>
-                <NavItem>lorem</NavItem>
-                <NavItem>ipsum</NavItem>
-                <NavItem>dolor</NavItem>
-            </NavMenu>
-            <Spacer />
-        </NavBarContent>
+        <NavBarContentWrapper>
+            <NavBarContent show={show}>
+                <Logo />
+                <Spacer />
+                <NavMenu>
+                    <NavItem>lorem</NavItem>
+                    <NavItem>ipsum</NavItem>
+                    <NavItem>dolor</NavItem>
+                </NavMenu>
+                <Spacer />
+            </NavBarContent>
+        </NavBarContentWrapper>
     </NavBarFixedWrapper>
 ));
 

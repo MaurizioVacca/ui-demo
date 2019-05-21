@@ -24,6 +24,10 @@ const NavMenu = styled.ul(({ theme }) => ({
     textTransform: 'uppercase'
 }));
 
+const NavBarContentWrapper = styled.div(() => ({
+    position: 'relative'
+}));
+
 const NavBarContent = styled.div(({ theme, show = true }) => ({
     backgroundColor: theme.colors.white,
     padding: '20px 60px',
@@ -44,7 +48,7 @@ const NavBarFixedWrapper = styled.div(({ theme }) => ({
     position: 'fixed',
     zIndex: 20,
     top: 0,
-    width: 'calc(100% - 120px)',
+    width: '100%',
     maxWidth: theme.viewport.maxWidth,
     maxHeight: 61,
     [`& + ${ArticleWrapper}`]: {
@@ -56,5 +60,6 @@ export {
     NavMenu,
     NavItem,
     NavBarContent,
+    NavBarContentWrapper,
     NavBarFixedWrapper
 };
