@@ -11,7 +11,7 @@ import { Article, NavBar } from 'sections';
 import HomeCover from 'images/cover.png';
 
 const Home = () => {
-    const [articles, setArticles] = useState([])
+    const [articles, setArticles] = useState([]);
     const [showNavBar, setShowNavBar] = useState(true);
     const articleRef = React.createRef();
     const navBarRef = React.createRef();
@@ -31,17 +31,19 @@ const Home = () => {
             const { current: navBarCurrent } = navBarRef;
             const { current: articleCurrent } = articleRef;
 
-            const navbarPosition = navBarCurrent.getBoundingClientRect();
-            const articlePosition = articleCurrent.getBoundingClientRect();
+            if (navBarCurrent) {
+                const navbarPosition = navBarCurrent.getBoundingClientRect();
+                const articlePosition = articleCurrent.getBoundingClientRect();
 
-            const vDistance = articlePosition.y - (navbarPosition.y + navbarPosition.height);
+                const vDistance = articlePosition.y - (navbarPosition.y + navbarPosition.height);
 
-            if (vDistance <= 36 && showNavBar) {
-                setShowNavBar(false);
-            }
+                if (vDistance <= 36 && showNavBar) {
+                    setShowNavBar(false);
+                }
 
-            if (vDistance > 36 && !showNavBar) {
-                setShowNavBar(true);
+                if (vDistance > 36 && !showNavBar) {
+                    setShowNavBar(true);
+                }
             }
         };
 
