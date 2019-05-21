@@ -51,6 +51,7 @@ const ArticleGallery = ({ images }) => {
                 columnTo={colTo}
                 rowFrom={rowFrom}
                 rowTo={rowTo}
+                key={index}
             >
                 <img src={content} alt={`article-img-${index}`} />
             </ArticleGalleryImageWrapper>
