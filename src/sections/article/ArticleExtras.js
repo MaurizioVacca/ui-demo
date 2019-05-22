@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { userShape } from 'models';
+
+import styled from 'styled-components';
 
 import { Icon, Column, Grid } from 'shared';
 import {
@@ -10,13 +13,18 @@ import {
 } from './Styled';
 
 const propTypes = {
-    user: userShape.isRequired
+    user: userShape.isRequired,
+    className: PropTypes.string
+};
+
+const defaultProps = {
+    className: ''
 };
 
 const ACTIONS = ['flame', 'paper-towel', 'drop'];
 
-const ArticleExtras = ({ user }) => (
-    <Grid>
+const ArticleExtras = ({ user, className }) => (
+    <Grid className={className}>
         <Column from={1} to={2} />
         <Column from={2} to={7}>
             <ArticleAuthor>
@@ -35,5 +43,19 @@ const ArticleExtras = ({ user }) => (
 );
 
 ArticleExtras.propTypes = propTypes;
+ArticleExtras.defaultProps = defaultProps;
 
-export default ArticleExtras;
+export default styled(ArticleExtras)(() => ({
+    '@media (max-width: 1169px)': {
+        paddingTop: 0,
+        [`${Column}:nth-child(3)`]: {
+            float: 'right'
+        }
+    },
+    '@media (max-width: 320px)': {
+        paddingTop: 0,
+        [`${Column}:nth-child(3)`]: {
+            float: 'none'
+        }
+    }
+}));

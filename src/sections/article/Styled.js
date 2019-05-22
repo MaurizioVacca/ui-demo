@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { getRelativeSize } from 'theme';
 
-import { Grid, Cell } from 'shared';
+import { Grid, Cell, Icon } from 'shared';
 
 import Cover from '../cover';
 
@@ -63,7 +63,12 @@ const ArticleActions = styled.div(() => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     zIndex: 10,
-    paddingTop: 22
+    paddingTop: 22,
+    '@media (max-width: 1169px)': {
+        [`${Icon} + ${Icon}`]: {
+            marginLeft: '30px'
+        }
+    }
 }));
 
 const ArticleCaption = styled.div(({ theme }) => ({
@@ -75,7 +80,7 @@ const ArticleCaption = styled.div(({ theme }) => ({
 const ArticleContent = styled.div(() => ({
     position: 'relative',
     top: -188,
-    width: 1170,
+    maxWidth: 1170,
     margin: '0 auto',
     paddingTop: 42
 }));
@@ -90,7 +95,9 @@ const ArticleAnimatedBackground = styled.div(({ theme, xScale = 1 }) => ({
     left: 0,
     transition: 'transform 0.4s ease-out',
     borderRadius: '12px 12px 0 0',
-    transform: `scale(${xScale}, 1)`
+    '@media (min-width: 1170px)': {
+        transform: `scale(${xScale}, 1)`
+    }
 }));
 
 ArticleAnimatedBackground.propTypes = {
@@ -117,7 +124,10 @@ const RelatedArticles = styled.div(({ offsetY = 0 }) => ({
     transform: `translateY(${offsetY}px)`,
     transformStyle: 'preserve-3d',
     transition: 'transform 200ms linear',
-    paddingBottom: 26
+    paddingBottom: 26,
+    '@media (max-width: 1170px)': {
+        display: 'none'
+    }
 }));
 
 RelatedArticles.propTypes = {

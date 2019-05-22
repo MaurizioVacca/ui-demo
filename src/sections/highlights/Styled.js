@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 import { getRelativeSize } from 'theme';
-import { Card, Button, Icon, Grid } from 'shared';
+import {
+    Card,
+    Button,
+    Icon,
+    Grid
+} from 'shared';
 
 const HighlightButton = styled(Button)(() => ({
     width: '100%'

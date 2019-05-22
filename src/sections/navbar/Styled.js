@@ -21,7 +21,10 @@ const NavMenu = styled.ul(({ theme }) => ({
     padding: 0,
     margin: 0,
     listStyle: 'none',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    '@media (max-width: 520px)': {
+        display: 'none'
+    }
 }));
 
 const NavBarContentWrapper = styled.div(() => ({

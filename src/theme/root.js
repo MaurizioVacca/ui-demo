@@ -44,13 +44,19 @@ const text = {
         color: colors.secondary,
         fontFamily: fontFamilies.primary,
         fontSize: getRelativeSize(36),
-        fontWeight: 700
+        fontWeight: 700,
+        '@media (max-width: 1169px)': {
+            fontSize: getRelativeSize(22)
+        }
     },
     h2: {
         color: colors.secondary,
         fontFamily: fontFamilies.primary,
         fontSize: getRelativeSize(26),
-        fontWeight: 700
+        fontWeight: 700,
+        '@media (max-width: 1169px)': {
+            fontSize: getRelativeSize(20)
+        }
     },
     paragraph: {
         color: colors.darkGrey,
