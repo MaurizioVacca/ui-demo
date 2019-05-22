@@ -10,7 +10,11 @@ import PropTypes from 'prop-types';
 import { articleShape } from 'models';
 import getUserById from 'api/users';
 
+import { Modal } from 'shared';
+import { useModal } from 'shared/modal';
+
 import Highlights from '../highlights';
+import HighlightModalContent from '../highlights/HighlightModalContent';
 
 import {
     ArticleAnimatedBackground,
@@ -36,8 +40,13 @@ const defaultProp = {
 const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
     const [backgroundScale, setBackgroundScale] = useState(1);
     const [user, setUser] = useState(null);
+    const [modalOrigin, setModalOrigin] = useState(null);
     const [offsetY, setOffsetY] = useState(-122);
+    const [selectedHighlight, setSelectedHighlight] = useState(null);
     const [lastScroll, setLastScroll] = useState(0);
+    const [modalStatus, toggleModal] = useModal();
+    const [nearbyHighlightNode, setNearbyHighlightNode] = useState(null);
+
     const animatedBgRef = useRef(null);
     const parallaxRef = useRef(null);
 
@@ -112,7 +121,27 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
         setUser(data);
     }, [article]);
 
-    const handleHighlightSelect = () => {};
+    const closeModal = () => {
+        nearbyHighlightNode.removeAttribute('style');
+
+        toggleModal();
+    };
+
+    const handleHighlightSelect = ({ event, highlight }) => {
+        const highlightDOMNode = event.currentTarget.parentNode;
+        const animatedNextSibiling = highlightDOMNode.nextSibling;
+
+        const { width, height } = highlightDOMNode.getBoundingClientRect();
+
+        setSelectedHighlight(highlight);
+        setModalOrigin({ width, height });
+
+        // show modal
+        toggleModal();
+
+        animatedNextSibiling.setAttribute('style', 'transform: translateY(100%);');
+        setNearbyHighlightNode(animatedNextSibiling);
+    };
 
     return (
         <Fragment>
@@ -131,6 +160,15 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
                     <ArticleGallery images={article.images} />
                 </ArticleContent>
             </ArticleWrapper>
+            <Modal status={modalStatus} onClickOutside={closeModal}>
+                {selectedHighlight && (
+                    <HighlightModalContent
+                        highlight={selectedHighlight}
+                        origin={modalOrigin}
+                        onClick={closeModal}
+                    />
+                )}
+            </Modal>
         </Fragment>
     );
 });

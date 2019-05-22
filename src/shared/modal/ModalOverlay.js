@@ -6,7 +6,8 @@ const ModalOverlay = styled.div(() => ({
     zIndex: 30,
     position: 'fixed',
     top: 0,
-    left: 0
+    left: 0,
+    overflow: 'hidden'
 }));
 
 export default ModalOverlay;

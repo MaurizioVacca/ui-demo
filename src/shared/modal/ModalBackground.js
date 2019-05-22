@@ -8,7 +8,8 @@ const ModalBackground = styled.div(({ theme }) => ({
     backgroundColor: theme.colors.darkGrey,
     width: '100%',
     height: '100%',
-    cursor: 'default'
+    cursor: 'default',
+    position: 'absolute'
 }));
 
 export default ModalBackground;
