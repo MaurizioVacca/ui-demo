@@ -131,10 +131,24 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
         const highlightDOMNode = event.currentTarget.parentNode;
         const animatedNextSibiling = highlightDOMNode.nextSibling;
 
-        const { width, height } = highlightDOMNode.getBoundingClientRect();
+        const {
+            x,
+            y,
+            width,
+            height,
+            top,
+            left
+        } = highlightDOMNode.getBoundingClientRect();
 
         setSelectedHighlight(highlight);
-        setModalOrigin({ width, height });
+        setModalOrigin({
+            x,
+            y,
+            width,
+            height,
+            top,
+            left
+        });
 
         // show modal
         toggleModal();
@@ -166,6 +180,7 @@ const Article = React.forwardRef(({ cover, article, highlights }, ref) => {
                         highlight={selectedHighlight}
                         origin={modalOrigin}
                         onClick={closeModal}
+                        status={modalStatus}
                     />
                 )}
             </Modal>

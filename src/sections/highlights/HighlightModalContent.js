@@ -1,4 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React, {
+    useRef,
+    useEffect,
+    useState
+} from 'react';
 import PropTypes from 'prop-types';
 
 import { articleShape } from 'models';
@@ -20,7 +24,7 @@ const propTypes = {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired
     }),
-    onClick: PropTypes.func,
+    onClick: PropTypes.func
 };
 
 const defaultProps = {
@@ -36,6 +40,7 @@ const HighlightModalContent = ({ highlight, origin, onClick }) => {
     const imagesRef = useRef(null);
     const imgGridRef = useRef(null);
     const headingRef = useRef(null);
+    const [isRendered, setIsRendered] = useState(false);
 
     const onEnterAnimation = () => {
         const { current: headingDOMNode } = headingRef;
@@ -44,23 +49,28 @@ const HighlightModalContent = ({ highlight, origin, onClick }) => {
         const { current: backgroundDOMNode } = contentBgRef;
         const slideAndFadeIn = 'opacity: 1; transform: translateY(0);';
 
-        if (backgroundDOMNode) {
+        if (backgroundDOMNode && !isRendered) {
             const computedSizes = backgroundDOMNode.getBoundingClientRect();
 
             const scaled = {
-                width: origin.width / computedSizes.width,
-                height: origin.height / computedSizes.height
+                x: origin.width / computedSizes.width,
+                y: origin.height / computedSizes.height
             };
 
-            const startingScale = `transform: scale(${scaled.width}, ${scaled.height});`;
+            const translated = {
+                x: origin.left - (computedSizes.left) - ((computedSizes.width + origin.width) / 2),
+                y: origin.top - (computedSizes.top)
+            };
 
-            backgroundDOMNode.setAttribute('style', startingScale);
+            const startingTransform = `transform: translate(${translated.x}px, ${translated.y}px) scale(${scaled.x}, ${scaled.y})`;
+
+            backgroundDOMNode.setAttribute('style', `${startingTransform}`);
             backgroundDOMNode.style.opacity = 1;
 
             setTimeout(() => {
-                backgroundDOMNode.style.transition = 'transform 400ms ease-out';
+                backgroundDOMNode.style.transition = 'transform 400ms, width 350ms, height 350ms ease-out';
 
-                backgroundDOMNode.style.transform = 'scale(1, 1)';
+                backgroundDOMNode.style.transform = 'translate(0, 0) scale(1, 1)';
 
                 if (headingDOMNode) {
                     setTimeout(() => {
@@ -79,6 +89,8 @@ const HighlightModalContent = ({ highlight, origin, onClick }) => {
                         imagesWrapperDOMNode.setAttribute('style', 'transform: scale(1, 1)');
                     }, 200);
                 }
+
+                setIsRendered(true);
             }, 20);
         }
     };
